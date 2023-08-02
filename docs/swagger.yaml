@@ -1,0 +1,102 @@
+definitions:
+  models.Dataset:
+    properties:
+      data:
+        description: |-
+          Actual data
+          example: { "key": "dataset1" }
+        type: integer
+      id:
+        description: |-
+          The ID of a dataaset
+          example: 130670
+        type: string
+    type: object
+  models.ErrorMsg:
+    properties:
+      msg:
+        type: string
+      status:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /data/id:
+    get:
+      consumes:
+      - application/json
+      description: get dataset with specific id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: ""
+      summary: ping example
+      tags:
+      - data
+  /data/idrange:
+    get:
+      consumes:
+      - application/json
+      description: get a range of ids in a given time range
+      parameters:
+      - description: start date
+        in: query
+        name: start
+        required: true
+        type: string
+      - description: end date
+        in: query
+        name: end
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Dataset'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorMsg'
+      summary: id range
+      tags:
+      - data
+  /data/timerange:
+    get:
+      consumes:
+      - application/json
+      description: get a range of ids in a given time range
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: ""
+      summary: get time range
+      tags:
+      - data
+  /example/helloworld:
+    get:
+      consumes:
+      - application/json
+      description: do ping hello world
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - example
+swagger: "2.0"
